@@ -18,6 +18,11 @@ Those bug will be fixed later
  + GDL_file: translated gdl filee
 
 ## Keyword implmented
+KEYWORD-1: Game, Players, Equipment, Board, Piece, Region, Rules, Start, Play, End. 
+KEYWORD-2: Square, Line, Each, ForEach, Top, Bottom. 
+KEYWORD-3: Mover, Empty, Add, Apply, Expand, Remove, ***Stack(BUG, Does not work)***
+KEYWORD-4: forEach, ColumnSize, IsEnemyAt, StepForwardToEmpty, ReachWin
+  
  + Game: the name of game. 
  + Players: the size of players. 
  + equipment: the basic information of game
