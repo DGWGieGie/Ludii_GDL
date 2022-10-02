@@ -1,0 +1,98 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Breakthrough
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Roles
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(role P1)
+(role P2)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Game Mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(<= (next (control P1)) (true (control P2)))
+(<= (next (control P2)) (true (control P1)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Initial State
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(init (cellholds 1 1 P1))
+(init (cellholds 2 1 P1))
+(init (cellholds 3 1 P1))
+(init (cellholds 4 1 P1))
+(init (cellholds 5 1 P1))
+(init (cellholds 6 1 P1))
+(init (cellholds 7 1 P1))
+(init (cellholds 8 1 P1))
+(init (cellholds 1 2 P1))
+(init (cellholds 2 2 P1))
+(init (cellholds 3 2 P1))
+(init (cellholds 4 2 P1))
+(init (cellholds 5 2 P1))
+(init (cellholds 6 2 P1))
+(init (cellholds 7 2 P1))
+(init (cellholds 8 2 P1))
+(init (cellholds 1 8 P2))
+(init (cellholds 2 8 P2))
+(init (cellholds 3 8 P2))
+(init (cellholds 4 8 P2))
+(init (cellholds 5 8 P2))
+(init (cellholds 6 8 P2))
+(init (cellholds 7 8 P2))
+(init (cellholds 8 8 P2))
+(init (cellholds 1 7 P2))
+(init (cellholds 2 7 P2))
+(init (cellholds 3 7 P2))
+(init (cellholds 4 7 P2))
+(init (cellholds 5 7 P2))
+(init (cellholds 6 7 P2))
+(init (cellholds 7 7 P2))
+(init (cellholds 8 7 P2))
+(index 1) (index 2) (index 3) (index 4) (index 5) (index 6) (index 7) (index 8)
+(++ 1 2)  (++ 2 3)  (++ 3 4)  (++ 4 5)  (++ 5 6)  (++ 6 7)  (++ 7 8)(init (control P1))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Legal Action
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(<= (legal P2 noop) (true (control P1)))
+(<= (legal P1 noop) (true (control P2)))
+(<= (legal P1 (move ?x ?y1 ?x ?y2)) (true (control P1)) (true (cellholds ?x ?y1 P1)) (++ ?y1 ?y2) (cellempty ?x ?y2))
+(<= (legal P1 (move ?x1 ?y1 ?x2 ?y2)) (true (control P1)) (true (cellholds ?x1 ?y1 P1)) (++ ?y1 ?y2) (++ ?x1 ?x2) (not (true (cellholds ?x2 ?y2 P1))))
+(<= (legal P1 (move ?x1 ?y1 ?x2 ?y2)) (true (control P1)) (true (cellholds ?x1 ?y1 P1)) (++ ?y1 ?y2) (++ ?x2 ?x1) (not (true (cellholds ?x2 ?y2 P1))))
+(<= (legal P2 (move ?x ?y1 ?x ?y2)) (true (control P2)) (true (cellholds ?x ?y1 P2)) (++ ?y2 ?y1) (cellempty ?x ?y2))
+(<= (legal P2 (move ?x1 ?y1 ?x2 ?y2)) (true (control P2)) (true (cellholds ?x1 ?y1 P2)) (++ ?y2 ?y1) (++ ?x1 ?x2) (not (true (cellholds ?x2 ?y2 P2))))
+(<= (legal P2 (move ?x1 ?y1 ?x2 ?y2)) (true (control P2)) (true (cellholds ?x1 ?y1 P2)) (++ ?y2 ?y1) (++ ?x2 ?x1) (not (true (cellholds ?x2 ?y2 P2))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  Move & Update
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(<= (next (cellholds ?x2 ?y2 ?player)) (role ?player) (does ?player (move ?x1 ?y1 ?x2 ?y2)))
+(<= (next (cellholds ?x3 ?y3 ?state)) (true (cellholds ?x3 ?y3 ?state)) (role ?player) (does ?player (move ?x1 ?y1 ?x2 ?y2)) (distinctcell ?x1 ?y1 ?x3 ?y3) (distinctcell ?x2 ?y2 ?x3 ?y3))
+(<= (cell ?x ?y) (index ?x) (index ?y))
+(<= (cellempty ?x ?y) (cell ?x ?y) (not (true (cellholds ?x ?y P1))) (not (true (cellholds ?x ?y P2))))
+(<= (distinctcell ?x1 ?y1 ?x2 ?y2) (cell ?x1 ?y1) (cell ?x2 ?y2) (distinct ?x1 ?x2))
+(<= (distinctcell ?x1 ?y1 ?x2 ?y2) (cell ?x1 ?y1) (cell ?x2 ?y2) (distinct ?y1 ?y2))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Win Condition
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(<= P1win (index ?x) (true (cellholds ?x 8 P1)))
+(<= P1win (not P2cell))
+(<= P1cell (cell ?x ?y) (true (cellholds ?x ?y P1)))
+(<= P2win (index ?x) (true (cellholds ?x 1 P2)))
+(<= P2win (not P1cell))
+(<= P2cell (cell ?x ?y) (true (cellholds ?x ?y P2)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Reward
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(<= (goal P1 100) P1win)
+(<= (goal P2 100) P2win)
+(<= (goal P1 0) P2win)
+(<= (goal P2 0) P1win)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; End
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(<= terminal P1win)
+(<= terminal P2win)
