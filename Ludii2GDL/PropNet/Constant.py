@@ -1,3 +1,0 @@
-CELL_MART = ['x', 'o']
-TERMINAL_CONDITION = ['WIN', 'DRAW', 'LOSS']
-PLAYERREWARD = {"WIN": 100, "DRAW": 50, "LOSS": 0}
