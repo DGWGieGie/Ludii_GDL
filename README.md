@@ -49,9 +49,9 @@ Format: ***Equipment*** <information>
  if it is board game, the size is NxN; if it is line game, the size is 1xN. 
  
 #### Piece
- Format: Piece \<string> <KEYWORD.>
+ Format: Piece \<string> \<KEYWORD>
   + \<string>: the name of Piece
-  + <KEYWORD>: 
+  + \<KEYWORD>: 
    * if ***<KEYWORD>*** is ***<P1|P2|etc.>***, it indicates the the player-1 is <string>
    * if ***<KEYWORD>*** is <Each>, it indicates that all piece in this game is <string>(it always is 'Pawn')
 
