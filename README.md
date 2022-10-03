@@ -26,9 +26,20 @@ KEYWORD-3: Mover, Empty, Add, Apply, Expand, Remove, ***Stack(BUG, Does not work
   
 KEYWORD-4: forEach, ColumnSize, IsEnemyAt, StepForwardToEmpty, ReachWin. 
   
-### Game
+### Game  
+Format: ***Game*** <String>
+ + <String>: the name of Game
   
- + Game: the name of game. 
+### Players
+Format: ***Players*** <int|list>
+ + <int|list>:
+   * **int**: the number of players
+   * **list**: the list of players
+ 
+ 
+ 
+ 
+ 
  + Players: the size of players. 
  + equipment: the basic information of game
    * board: the board information of game
