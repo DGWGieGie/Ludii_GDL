@@ -46,8 +46,7 @@ Format: ***Equipment*** <information>
   * square: square game
   * line: line game
  + <int>: the size of game:  
- if it is board game, the size is NxN. 
-   
+ if it is board game, the size is NxN. <\br>
  if it is line game, the size is 1xN. 
  
  
