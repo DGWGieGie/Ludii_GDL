@@ -26,6 +26,7 @@ KEYWORD-3: Mover, Empty, Add, Apply, Expand, Remove, ***Stack(BUG, Does not work
   
 KEYWORD-4: forEach, ColumnSize, IsEnemyAt, StepForwardToEmpty, ReachWin. 
   
+### Game
   
  + Game: the name of game. 
  + Players: the size of players. 
