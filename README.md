@@ -36,11 +36,22 @@ Format: ***Players*** <int|list>
    * **int**: the number of players
    * **list**: the list of players
  
+### Equipment
+Format: ***Equipment*** <information>
+ + <information>: the ludii that including basic information of game
+
+#### Board
+ Format: Board (<square|line> <int>)
+ + <square|line>:
+  * square: square game
+  * line: line game
+ + <int>: the size of game:  
+ if it is board game, the size is NxN. 
+ if it is line game, the size is 1xN
  
  
  
- 
- + Players: the size of players. 
+
  + equipment: the basic information of game
    * board: the board information of game
      + format: (board (<type> <int>))
