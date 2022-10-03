@@ -46,25 +46,22 @@ Format: ***Equipment*** <information>
   * square: square game
   * line: line game
  + <int>: the size of game:  
- if it is board game, the size is NxN. <\br>
- if it is line game, the size is 1xN. 
+ if it is board game, the size is NxN; if it is line game, the size is 1xN. 
+ 
+#### Piece
+ Format: Piece \<string> <KEYWORD.>
+  + \<string>: the name of Piece
+  + <KEYWORD>: 
+   * if ***<KEYWORD>*** is ***<P1|P2|etc.>***, it indicates the the player-1 is <string>
+   * if ***<KEYWORD>*** is <Each>, it indicates that all piece in this game is <string>(it always is 'Pawn')
+
+#### Regions
  
  
  
 
- + equipment: the basic information of game
-   * board: the board information of game
-     + format: (board (<type> <int>))
-       * board: the keyword
-       * type: the type of board, including squre, line, etc.(implement squre and line now)
-       * <int>: the size of board, if the type is ***squre***, the size will be N*N, if the type is ***line***, the size will be 1*N
-   * piece: the piece information of game
-     + format: (piece <string> <KEYWORD>)
-       * piece: the keyword
-       * string: define the name of this piece
-       * <KEYWORD>: 
-         + if it is <P1|P2|...>, it indicates that the piece P1 is <string>
-         + if it is <Each>, it indicates that all piece in this game is <string>(it always is 'Pawn')
+
+
    * regions: the location of information of game; eg. the Player-1 location, Player-2 location. it is ***optional keyword***
      + format: ((regions <P1|P2|etc> (sites <Top|Bottom>)))
        * regions: the keyword
