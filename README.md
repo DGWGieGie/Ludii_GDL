@@ -71,12 +71,12 @@ Format: (***Equipment*** <information>)
    + <Ludii-Move>: define the move of game
 
 #### Play
- Format: (play <Ludii-Move>)
-  + <Ludii-Move>: define the move of game
+ Format: (play \<Ludii-Move>)
+  + \<Ludii-Move>: define the move of game
 
 #### End
- Format: format: (end <Ludii-End>)
-  + <Ludii-End>: define the terminal of game
+ Format: format: (end \<Ludii-End>)
+  + \<Ludii-End>: define the terminal of game
  
 
 ### Square: 
