@@ -24,7 +24,7 @@ KEYWORD-2: Square, Line, Each, ForEach, Top, Bottom.
   
 KEYWORD-3: Mover, Empty, Add, Apply, Expand, Remove, ***Stack(BUG, Does not work)***
   
-KEYWORD-4: forEach, ColumnSize, IsEnemyAt, StepForwardToEmpty, ReachWin. 
+KEYWORD-4: ColumnSize, IsEnemyAt, StepForwardToEmpty, ReachWin. 
   
 ### Game  
 Format: (***Game*** \<string>)
@@ -65,24 +65,53 @@ Format: (***Equipment*** <information>)
   + \<Ludii>: it is ludii that descript the rules of game
 
  #### Start
+  Format: (start {(place \<string-Piece> (<Ludii-Move>), etc})
+   + place: a keyword
+   + \<string-Piece>: the name of Piece, which is defined on ***keyword-Piece*** 
+   + <Ludii-Move>: define the move of game
+
+#### Play
+ Format: (play <Ludii-Move>)
+  + <Ludii-Move>: define the move of game
+
+#### End
+ Format: format: (end <Ludii-End>)
+  + <Ludii-End>: define the terminal of game
  
+
+### Square: it is square game
+### Line: it is line game
+### Top: The Top area of board
+### Bottom: the bottom area of board
+### Each: define the name of each piece
+### ForEach: define the legal move of each piece
+### Mover: current players
+### Empty: the cell is blank
+### Add: add the piece on a cell
+ Format: (move add(to \<Ludii-Cell>))
+  + <Ludii-Cell>: the status of the cell
  
+### Apply: excuting the move
+ Format: (Apply \<Ludii-Move>):
+  + \<Ludii-Move>: define the move of game
 
+### Expand: expand direction{From top to bottom; From bottom to Top}
+ Format: (Expand (sites <Top|Bottom>)):
+  + <Top|Bottom>: if it is ***Top***, expanding from bottom to Top; if it is ***Bottom***, expanding from Top to Bottom
 
+### Remove: Any piece owned by the current player can be removed from the board.
+ Format: (remove (sites <occupied>)):
+  + <occupied>: existing piece on this cell
 
- + rules: the rule information of game
-   * start: the initial information of game
-     + format (start {(place (location inforamtion), etc)})
-       * start: the keyword
-       * last part will be explained on ***Appendix Section***
-   * play: the legal move information of game
-     + format: (play MOVE-KEYWORD)
-       * play: the keyword
-       * MOVE-KEYWORD: the legal move; including ***move, flip, etc***; it could include other keyword, see ***Appendix Section***
-   * end: the terminal inforamtion of game
-     + format: (end END-KEYWORD)
-       * end: the keyword
-       * END-KEYWORD: the terminal rule
+### ***Stack(BUG, Does not work)*** specifies if the piece is added on top of a stack or not.
+
+### ColumnSize: count the size of special column
+
+### IsEnemyAt: judge special cell is empty or not
+
+### StepForwardToEmpty: the legal move for a piece is move forward, including front-left, front & front-right
+ 
+### ReachWin: if mover reaches the opponent's start point, the mover win the game
     
          
          
