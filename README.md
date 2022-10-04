@@ -61,8 +61,8 @@ Format: (***Equipment*** <information>)
   + sites <Top|Bottom>: the ***PX*** sites on the Top or Bottom of board
 
 ### Rules
- Format: (Rules <Ludii>)
-  + <Ludii>: it is ludii that descript the rules of game
+ Format: (Rules \<Ludii>)
+  + \<Ludii>: it is ludii that descript the rules of game
 
  #### Start
  
