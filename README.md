@@ -97,21 +97,25 @@ Format: (***Equipment*** <information>)
  the cell is blank
 ### Add: 
  add the piece on a cell
+   
  Format: (move add(to \<Ludii-Cell>))
   + <Ludii-Cell>: the status of the cell
  
 ### Apply: 
  excuting the move
+   
  Format: (Apply \<Ludii-Move>):
   + \<Ludii-Move>: define the move of game
 
 ### Expand: 
  expand direction{From top to bottom; From bottom to Top}
+   
  Format: (Expand (sites <Top|Bottom>)):
   + <Top|Bottom>: if it is ***Top***, expanding from bottom to Top; if it is ***Bottom***, expanding from Top to Bottom
 
 ### Remove: 
  Any piece owned by the current player can be removed from the board.
+   
  Format: (remove (sites <occupied>)):
   + <occupied>: existing piece on this cell
 
