@@ -79,39 +79,55 @@ Format: (***Equipment*** <information>)
   + <Ludii-End>: define the terminal of game
  
 
-### Square: it is square game
-### Line: it is line game
-### Top: The Top area of board
-### Bottom: the bottom area of board
-### Each: define the name of each piece
-### ForEach: define the legal move of each piece
-### Mover: current players
-### Empty: the cell is blank
-### Add: add the piece on a cell
+### Square: 
+ it is square game
+### Line: 
+ it is line game
+### Top: 
+ The Top area of board
+### Bottom: 
+ the bottom area of board
+### Each: 
+ define the name of each piece
+### ForEach: 
+ define the legal move of each piece
+### Mover: 
+ current players
+### Empty: 
+ the cell is blank
+### Add: 
+ add the piece on a cell
  Format: (move add(to \<Ludii-Cell>))
   + <Ludii-Cell>: the status of the cell
  
-### Apply: excuting the move
+### Apply: 
+ excuting the move
  Format: (Apply \<Ludii-Move>):
   + \<Ludii-Move>: define the move of game
 
-### Expand: expand direction{From top to bottom; From bottom to Top}
+### Expand: 
+ expand direction{From top to bottom; From bottom to Top}
  Format: (Expand (sites <Top|Bottom>)):
   + <Top|Bottom>: if it is ***Top***, expanding from bottom to Top; if it is ***Bottom***, expanding from Top to Bottom
 
-### Remove: Any piece owned by the current player can be removed from the board.
+### Remove: 
+ Any piece owned by the current player can be removed from the board.
  Format: (remove (sites <occupied>)):
   + <occupied>: existing piece on this cell
 
 ### ***Stack(BUG, Does not work)*** specifies if the piece is added on top of a stack or not.
 
-### ColumnSize: count the size of special column
+### ColumnSize: 
+ count the size of special column
 
-### IsEnemyAt: judge special cell is empty or not
+### IsEnemyAt: 
+ judge special cell is empty or not
 
-### StepForwardToEmpty: the legal move for a piece is move forward, including front-left, front & front-right
+### StepForwardToEmpty: 
+ the legal move for a piece is move forward, including front-left, front & front-right
  
-### ReachWin: if mover reaches the opponent's start point, the mover win the game
+### ReachWin: 
+ if mover reaches the opponent's start point, the mover win the game
     
          
          
