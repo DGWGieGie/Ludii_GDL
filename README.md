@@ -119,7 +119,9 @@ Format: (***Equipment*** <information>)
  Format: (remove (sites <occupied>)):
   + <occupied>: existing piece on this cell
 
-### ***Stack(BUG, Does not work)*** specifies if the piece is added on top of a stack or not.
+### Stack:***The bug has been fixed, it could work for stack function, applied in connect-4***
+ specifies if the piece is added on top of a stack or not.
+ 
 
 ### ColumnSize: 
  count the size of special column
@@ -132,6 +134,15 @@ Format: (***Equipment*** <information>)
  
 ### ReachWin: 
  if mover reaches the opponent's start point, the mover win the game
+
+ 
+## GDL Version
+ There are two version for determine the ***Line***
+ + the version-1: it contains the variable and using (++ x1 x2) etc. to determine the ***Line***
+ + the version-2: it is more complicated. It means that it wirte down all situation that it is ***Line***, which means that larger board size has more situation
+ For GDL, the version-1 is more effective, because it could describe the game with less code. Moreover, convert to PropNet, the Version-1 PropNet is smaller than the Verson-2 PropNet. ***However, the Version-2 PropNet is more effective on training NN.***
+ The connect-4 as the example, training NN using version-1 PropNet takes 1408s for 50 self-play games; training NN using version-2 PropNet takes 1087s for 50 self-play games.
+ Currently, I will explore the reason of this condition if i have enough time.
     
          
          
