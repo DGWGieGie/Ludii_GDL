@@ -1,0 +1,121 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Tic-Tac-Toe
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Roles
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(role P1)
+(role P2)
+(role P3)
+(role P4)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Game Mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(<= (next (control P2)) (true (control P1)))
+(<= (next (control P3)) (true (control P2)))
+(<= (next (control P4)) (true (control P3)))
+(<= (next (control P1)) (true (control P4)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Initial State
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(init (cell 1 1 b))
+(init (cell 1 2 b))
+(init (cell 1 3 b))
+(init (cell 1 4 b))
+(init (cell 2 1 b))
+(init (cell 2 2 b))
+(init (cell 2 3 b))
+(init (cell 2 4 b))
+(init (cell 3 1 b))
+(init (cell 3 2 b))
+(init (cell 3 3 b))
+(init (cell 3 4 b))
+(init (cell 4 1 b))
+(init (cell 4 2 b))
+(init (cell 4 3 b))
+(init (cell 4 4 b))
+(init (control P1))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Legal Action
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(<= open (true (cell ?m ?n b)))
+(<= (legal P1 noop) (true (control P2)))
+(<= (legal P1 noop) (true (control P3)))
+(<= (legal P1 noop) (true (control P4)))
+(<= (legal P2 noop) (true (control P1)))
+(<= (legal P2 noop) (true (control P3)))
+(<= (legal P2 noop) (true (control P4)))
+(<= (legal P3 noop) (true (control P1)))
+(<= (legal P3 noop) (true (control P2)))
+(<= (legal P3 noop) (true (control P4)))
+(<= (legal P4 noop) (true (control P1)))
+(<= (legal P4 noop) (true (control P2)))
+(<= (legal P4 noop) (true (control P3)))
+(<= (legal ?w (mark ?x ?y)) (true (cell ?x ?y b)) (true (control ?w)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  Move & Update
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(<= (next (cell ?m ?n x)) (does P1 (mark ?m ?n)) (true (cell ?m ?n b)))
+(<= (next (cell ?m ?n o)) (does P2 (mark ?m ?n)) (true (cell ?m ?n b)))
+(<= (next (cell ?m ?n y)) (does P3 (mark ?m ?n)) (true (cell ?m ?n b)))
+(<= (next (cell ?m ?n z)) (does P4 (mark ?m ?n)) (true (cell ?m ?n b)))
+(<= (next (cell ?m ?n ?w)) (true (cell ?m ?n ?w)) (distinct ?w b))
+(<= (next (cell ?m ?n b)) (does ?w (mark ?j ?k)) (true (cell ?m ?n b)) (or (distinct ?m ?j) (distinct ?n ?k)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Win Condition
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(<= (row ?m ?x) (true (cell ?m 1 ?x)) (true (cell ?m 2 ?x)) (true (cell ?m 3 ?x)))
+(<= (row ?m ?x) (true (cell ?m 2 ?x)) (true (cell ?m 3 ?x)) (true (cell ?m 4 ?x)))
+(<= (column ?n ?x) (true (cell 1 ?n ?x)) (true (cell 2 ?n ?x)) (true (cell 3 ?n ?x)))
+(<= (column ?n ?x) (true (cell 2 ?n ?x)) (true (cell 3 ?n ?x)) (true (cell 4 ?n ?x)))
+(<= (diagonal ?x) (true (cell 1 1 ?x)) (true (cell 2 2 ?x)) (true (cell 3 3 ?x)))
+(<= (diagonal ?x) (true (cell 1 3 ?x)) (true (cell 2 2 ?x)) (true (cell 3 1 ?x)))
+(<= (diagonal ?x) (true (cell 2 2 ?x)) (true (cell 3 3 ?x)) (true (cell 4 4 ?x)))
+(<= (diagonal ?x) (true (cell 2 4 ?x)) (true (cell 3 3 ?x)) (true (cell 4 2 ?x)))
+(<= (diagonal ?x) (true (cell 1 2 ?x)) (true (cell 2 3 ?x)) (true (cell 3 4 ?x)))
+(<= (diagonal ?x) (true (cell 1 4 ?x)) (true (cell 2 3 ?x)) (true (cell 3 2 ?x)))
+(<= (diagonal ?x) (true (cell 2 1 ?x)) (true (cell 3 2 ?x)) (true (cell 4 3 ?x)))
+(<= (diagonal ?x) (true (cell 2 3 ?x)) (true (cell 3 2 ?x)) (true (cell 4 1 ?x)))
+(<= (line ?x) (row ?m ?x))
+(<= (line ?x) (column ?m ?x))
+(<= (line ?x) (diagonal ?x))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Reward
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(<= (goal P1 100) (line x))
+(<= (goal P2 100) (line o))
+(<= (goal P3 100) (line y))
+(<= (goal P4 100) (line z))
+(<= (goal P1 50) (not (line x)) (not (line o)) (not (line y)) (not (line z)) (not open))
+(<= (goal P2 50) (not (line x)) (not (line o)) (not (line y)) (not (line z)) (not open))
+(<= (goal P3 50) (not (line x)) (not (line o)) (not (line y)) (not (line z)) (not open))
+(<= (goal P4 50) (not (line x)) (not (line o)) (not (line y)) (not (line z)) (not open))
+(<= (goal P1 0) (line o))
+(<= (goal P1 0) (line y))
+(<= (goal P1 0) (line z))
+(<= (goal P2 0) (line x))
+(<= (goal P2 0) (line y))
+(<= (goal P2 0) (line z))
+(<= (goal P3 0) (line x))
+(<= (goal P3 0) (line o))
+(<= (goal P3 0) (line z))
+(<= (goal P4 0) (line x))
+(<= (goal P4 0) (line o))
+(<= (goal P4 0) (line y))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; End
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(<= terminal(line x))
+(<= terminal(line o))
+(<= terminal(line y))
+(<= terminal(line z))
+(<= terminal(not open))
+
