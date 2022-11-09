@@ -22,7 +22,7 @@ KEYWORD-1: Game, Players, Equipment, Board, Piece, Region, Rules, Start, Play, E
   
 KEYWORD-2: Square, Line, Each, ForEach, Top, Bottom. 
   
-KEYWORD-3: Mover, Empty, Add, Apply, Expand, Remove, ***Stack(BUG, Does not work)***
+KEYWORD-3: Mover, Empty, Add, Apply, Expand, Remove, ***Stack(FIX BUG)***
   
 KEYWORD-4: ColumnSize, IsEnemyAt, StepForwardToEmpty, ReachWin. 
   
